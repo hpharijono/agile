@@ -1,4 +1,5 @@
 # Screening Task
+
 Sample project that exposes the 4 values and 12 principles of Agile Software Development (https://agilemanifesto.org/).
 
 ## Setup

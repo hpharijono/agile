@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # Third-Party Library Packages
     "rest_framework",
     "drf_yasg",
+    "django_filters",
     # Custom Apps
     "agile",
 ]

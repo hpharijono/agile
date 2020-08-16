@@ -63,6 +63,29 @@ class TestAgileViews:
         resp = client.get(url)
         assert resp.status_code == status.HTTP_200_OK
 
+    def test_get_filter_value_view(self, logged_in_client):
+        AgileFactory.create_batch(4, type="value")
+        url = reverse("agile:agile-list")
+        resp = logged_in_client.get(url, {"type": Agile.TYPE_VALUE})
+        assert resp.status_code == status.HTTP_200_OK
+        if len(resp.json()) > 0:
+            if "type" in resp.json()[0]:
+                assert resp.json()[0]["type"] == Agile.TYPE_VALUE
+
+    def test_get_filter_principle_view(self, logged_in_client):
+        AgileFactory.create_batch(12, type="value")
+        url = reverse("agile:agile-list")
+        resp = logged_in_client.get(url, {"type": Agile.TYPE_PRINCIPLE})
+        assert resp.status_code == status.HTTP_200_OK
+        if len(resp.json()) > 0:
+            if "type" in resp.json()[0]:
+                assert resp.json()[0]["type"] == Agile.TYPE_PRINCIPLE
+
+    def test_get_filter_invalid_value_view(self, logged_in_client):
+        url = reverse("agile:agile-list")
+        resp = logged_in_client.get(url, {"type": "123"})
+        assert resp.status_code == status.HTTP_400_BAD_REQUEST
+
     def test_unauthenticated_post(self, client, defaults):
         """Tests post request creates a Agile instance."""
         url = reverse("agile:agile-list")

@@ -2,6 +2,7 @@ from rest_framework import (
     permissions,
     viewsets,
 )
+from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import Agile
 from .serializers import AgileSerializer
@@ -26,3 +27,7 @@ class AgileViewSet(viewsets.ModelViewSet):
     queryset = Agile.objects.all()
     serializer_class = AgileSerializer
     permission_classes = (IsAuthenticated,)
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = [
+        "type",
+    ]

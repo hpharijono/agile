@@ -16,6 +16,7 @@ django = "*"
 djangorestframework = "*"
 drf-yasg = "*"
 factory-boy = "*"
+django-filter = "*"
 
 [requires]
 python_version = "3.8"

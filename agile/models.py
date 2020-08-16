@@ -40,7 +40,10 @@ class Agile(models.Model):
         help_text="Description of the Agile Value or Principle.",
     )
     type = models.CharField(
-        max_length=20, choices=AGILE_TYPES_CHOICES, default=TYPE_VALUE
+        max_length=20,
+        choices=AGILE_TYPES_CHOICES,
+        default=TYPE_VALUE,
+        help_text="Choices: 'value', 'principle'",
     )
 
     creation_date = models.DateTimeField(_("date created"), auto_now_add=True)

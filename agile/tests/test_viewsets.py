@@ -10,6 +10,7 @@ from rest_framework.test import APIClient
 from agile.models import Agile
 from agile.tests.factory.agile_factory import AgileFactory
 from agile.tests.factory.user_factory import UserFactory
+from .utils import validate_uuid4
 
 
 @pytest.fixture
@@ -75,6 +76,7 @@ class TestAgileViews:
         paylod.update({"type": Agile.TYPE_VALUE})
         resp = logged_in_client.post(url, defaults["payload"])
         assert resp.status_code == status.HTTP_201_CREATED
+        assert validate_uuid4(resp.json()["uuid"])
         agile = Agile.objects.get_or_none(id=resp.json()["id"])
         assert agile is not None
         assert agile.type == Agile.TYPE_VALUE
@@ -86,6 +88,7 @@ class TestAgileViews:
         paylod.update({"type": Agile.TYPE_PRINCIPLE})
         resp = logged_in_client.post(url, defaults["payload"])
         assert resp.status_code == status.HTTP_201_CREATED
+        assert validate_uuid4(resp.json()["uuid"])
         agile = Agile.objects.get_or_none(id=resp.json()["id"])
         assert agile is not None
         assert agile.type == Agile.TYPE_PRINCIPLE
@@ -124,3 +127,10 @@ class TestAgileViews:
         agile_value = Agile.objects.get(id=resp.json()["id"])
         assert agile_value.description == payload["description"]
         assert agile_value.name == payload["name"]
+
+    def test_uuid_get(self, logged_in_client):
+        agile_value = AgileFactory.create(type="value")
+        url = self.get_detail_url(agile_value.id)
+        resp = logged_in_client.get(url)
+        assert resp.status_code == status.HTTP_200_OK
+        assert validate_uuid4(resp.json()["uuid"])

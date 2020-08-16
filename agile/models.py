@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.db.models.query import QuerySet
 from django.utils.translation import ugettext_lazy as _
@@ -29,6 +31,7 @@ class Agile(models.Model):
         (TYPE_VALUE, "Value"),
         (TYPE_PRINCIPLE, "Principle"),
     )
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True)
     name = models.CharField(_("agile value/principle name"), max_length=100)
     description = models.TextField(
         _("agile description"),

@@ -11,6 +11,7 @@ class AgileSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "type",
+            "uuid",
             "name",
             "description",
         )

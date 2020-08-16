@@ -23,7 +23,7 @@ class AgileManager(models.Manager):
 
 class Agile(models.Model):
 
-    TYPE_VALUE = 'value'
+    TYPE_VALUE = "value"
     TYPE_PRINCIPLE = "principle"
     AGILE_TYPES_CHOICES = (
         (TYPE_VALUE, "Value"),
@@ -48,5 +48,5 @@ class Agile(models.Model):
     class Meta:
         verbose_name_plural = _("Agile Values and Principles")
 
-    def __str__(self) -> bool:
+    def __str__(self) -> str:
         return f"{self.type}: {self.name}"

@@ -1,7 +1,5 @@
 import pytest
 
-from django.test import TestCase
-
 from typing import Dict
 
 from agile.models import Agile
@@ -27,7 +25,7 @@ class TestAgileSerializer:
 
     def test_valid(self, defaults):
         serializer = AgileSerializer(data=defaults["data"])
-        assert serializer.is_valid() == True
+        assert serializer.is_valid()
 
     def test_save(self, defaults):
         serializer = AgileSerializer(data=defaults["data"])

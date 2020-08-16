@@ -8,6 +8,8 @@ mypy = "*"
 black = "~=19.10b0"
 pytest = "*"
 pytest-django = "*"
+flake8 = "*"
+bandit = "*"
 
 [packages]
 django = "*"

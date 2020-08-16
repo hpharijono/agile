@@ -8,11 +8,14 @@ mypy = "*"
 black = "~=19.10b0"
 pytest = "*"
 pytest-django = "*"
+flake8 = "*"
+bandit = "*"
 
 [packages]
 django = "*"
 djangorestframework = "*"
 drf-yasg = "*"
+factory-boy = "*"
 
 [requires]
 python_version = "3.8"

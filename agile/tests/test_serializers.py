@@ -1,21 +1,16 @@
 import pytest
 
-from django.test import TestCase
-
 from typing import Dict
 
-from agile.models import Agile
 from agile.serializers import AgileSerializer
+from agile.tests.factory.agile_factory import AgileFactory
 
 
 @pytest.mark.django_db
 class TestAgileSerializer:
     @pytest.fixture
-    def agile_fixture(self, db) -> Agile:
-        return Agile.objects.create(name="name", description="description")
-
-    @pytest.fixture
-    def defaults(self, agile_fixture) -> Dict[str, Dict[str, str]]:
+    def defaults(self) -> Dict[str, Dict[str, str]]:
+        agile_fixture = AgileFactory.create()
         data = {
             "name": "Responding to change over following a plan.",
             "description": "Circumstances change and sometimes customers demand extra.",
@@ -27,7 +22,7 @@ class TestAgileSerializer:
 
     def test_valid(self, defaults):
         serializer = AgileSerializer(data=defaults["data"])
-        assert serializer.is_valid() == True
+        assert serializer.is_valid()
 
     def test_save(self, defaults):
         serializer = AgileSerializer(data=defaults["data"])
